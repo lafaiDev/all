@@ -1,42 +1,27 @@
-ZendSkeletonApplication
+Zend Application 
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
+This is a simple, skeleton application using the ZF2 MVC , doctrine , ajax and module
 systems. This application is meant to be used as a starting place for those
 looking to get their feet wet with ZF2.
 
 Installation using Composer
 ---------------------------
 
-The easiest way to create a new ZF2 project is to use [Composer](https://getcomposer.org/). If you don't have it already installed, then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
-
-Create your new ZF2 project:
-
-    composer create-project -n -sdev zendframework/skeleton-application path/to/install
+### Installation using a tarball with a local Composer and git
 
 
 
-### Installation using a tarball with a local Composer
+Download composer into your project directory and install the dependencies:
 
-If you don't have composer installed globally then another way to create a new ZF2 project is to download the tarball and install it:
-
-1. Download the [tarball](https://github.com/zendframework/ZendSkeletonApplication/tarball/master), extract it and then install the dependencies with a locally installed Composer:
-
-        cd my/project/dir
-        curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-    
-
-2. Download composer into your project directory and install the dependencies:
-
-        $curl -s https://getcomposer.org/installer | php
-        $php composer.phar install
+          git clone https://github.com/lafaiDev/all.git
         
-        or 
-        if your composer integer in your path windows
-        $php composer install
+   if your composer integer in your path windows
+   
+          $php composer install
 
 If you don't have access to curl, then install Composer into your project as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
@@ -56,7 +41,8 @@ interfaces.
 
 ### data basse doctrine 
 
-php vendor/doctrine/doctrine-module/bin/doctrine-module.php orm:schema-tool:update --force
+
+	php vendor/doctrine/doctrine-module/bin/doctrine-module.php orm:schema-tool:update --force
 
 **Note:** cree data base name 'all_db' and run cmd*.
 ### Apache setup
