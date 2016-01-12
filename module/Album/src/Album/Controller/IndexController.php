@@ -125,6 +125,7 @@ class IndexController extends AbstractActionController
 
 		return $this->redirect()->toRoute('album/default', array('controller' => 'index', 'action' => 'index'));
 	}
+	
     public function deleteajaxAction(){
         $id  = (int) $_POST['id'];
         $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -136,7 +137,7 @@ class IndexController extends AbstractActionController
             $msg = "the selected album was successfuly deleted";
         }
         catch (\Exception $ex) {
-            // ... maybe do something more
+        	
             $msg=$ex->getMessage();
         }
 
