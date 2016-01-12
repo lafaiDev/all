@@ -1,0 +1,66 @@
+<h1>Index Action</h1>
+
+<script >
+    function delete_album(al_id)
+    {
+        var result = confirm('are you sure ');
+
+        if(result == true)
+        {
+            $.ajax({
+                type : 'POST',
+                url  : 'deleteajax',
+                data : {'id':al_id},
+                success: function(data)
+                {
+                    alert("testtt rote");
+                    if(data.response == 'the selected album was successfuly deleted')
+                    {
+                        $("#row_"+al_id).fadeOut(2000, function(){
+                                $("#row_"+al_id).remove(); }
+                        );
+                    }
+                    else
+                    {
+                        alert("the selected album was successfuly deleted");
+                    }
+
+                },
+                failure: function()
+                {
+                    alert(" could not connect to the delete action !!!!");
+                }
+            });
+        }
+
+
+    }
+</script>
+
+<?php // if ($this->identity()) { ?>
+<a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'create')); ?>">Create</a>
+<?php // } ?>
+<table class="table">
+    <tr>
+
+        <th>Id</th>
+        <th>Artist</th>
+        <th>Title</th>
+
+    </tr>
+    <?php
+    foreach ($rowset as $album) {
+    ?>
+        <tr  id="<?php echo "row_".$album->getId(); ?>">
+
+            <td><?php  echo $album->getId(); ?></td>
+            <td><?php  echo $album->getArtist(); ?></td>
+            <td><?php  echo $album->getTitle(); ?></td>
+            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'update', 'id' => $album->getId())); ?>">Edit</a></td>
+            <td><a onclick="delete_album(<?php echo $album->getId();?>);">Delete ajax</a></td>
+            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'delete','id' => $album->getId())); ?>">Delete simple</a></td>
+        </tr>
+    <?php
+    }
+    ?>
+</table>
