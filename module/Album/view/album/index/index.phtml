@@ -1,10 +1,65 @@
 <h1>Index Action</h1>
+<?php 
+$title = 'album.index.title';
+$this->headTitle($title);
+$this->layout()->pageTitle = $title;
 
-<script >
+
+?>
+<?php // if ($this->identity()) { ?>
+<a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'create')); ?>">Create</a>
+<?php // } ?>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Artist</th>
+        <th>Title</th>
+
+    </tr>
+    <?php
+    foreach ($rowset as $album) {
+    ?>
+        <tr  id="<?php echo "row_".$album->getId(); ?>">
+
+            <td><?php  echo $album->getId(); ?></td>
+            <td><?php  echo $album->getArtist(); ?></td>
+            <td><?php  echo $album->getTitle(); ?></td>
+            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'update', 'id' => $album->getId())); ?>">Edit</a></td>
+            
+            <td><a onclick="delete_album(<?php echo $album->getId();?>);">Delete ajax</a></td>
+            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'delete','id' => $album->getId())); ?>">Delete simple</a></td>
+        </tr>
+    <?php
+    }
+    ?>
+</table>
+<h1>data table</h1>
+<table id="table-job" class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Artist</th>
+								<th>Title</th>
+								
+						
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+
+					</table>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#table-job').dataTable({});
+	});
+
     function delete_album(al_id)
     {
         var result = confirm('are you sure ');
-
+		//var url1='</?php //echo $this->url('album/default', array('controller' => 'index', 'action' => 'delete','id' => 'al_idd'));?>';
+		//var url = url1.replace("al_idd", al_id);
         if(result == true)
         {
             $.ajax({
@@ -36,31 +91,3 @@
 
     }
 </script>
-
-<?php // if ($this->identity()) { ?>
-<a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'create')); ?>">Create</a>
-<?php // } ?>
-<table class="table">
-    <tr>
-
-        <th>Id</th>
-        <th>Artist</th>
-        <th>Title</th>
-
-    </tr>
-    <?php
-    foreach ($rowset as $album) {
-    ?>
-        <tr  id="<?php echo "row_".$album->getId(); ?>">
-
-            <td><?php  echo $album->getId(); ?></td>
-            <td><?php  echo $album->getArtist(); ?></td>
-            <td><?php  echo $album->getTitle(); ?></td>
-            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'update', 'id' => $album->getId())); ?>">Edit</a></td>
-            <td><a onclick="delete_album(<?php echo $album->getId();?>);">Delete ajax</a></td>
-            <td><a href="<?php echo $this->url('album/default', array('controller' => 'index', 'action' => 'delete','id' => $album->getId())); ?>">Delete simple</a></td>
-        </tr>
-    <?php
-    }
-    ?>
-</table>
