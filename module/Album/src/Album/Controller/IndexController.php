@@ -27,6 +27,17 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('rowset' => $albums));
     }
 
+    // Retrieve - Albums table
+    public function indexdatatableAction()
+    {
+    	$tabjson = array ();
+    	$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+    	$albums = $entityManager->getRepository('Album\Entity\Album')->findAll();
+    	
+    	$response = new JSonModel(array('response' => $albums));
+    	return $response;
+    }
+    
     // Create - C
     public function createAction()
     {

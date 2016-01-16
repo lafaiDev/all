@@ -48,7 +48,7 @@ $this->layout()->pageTitle = $title;
         {
             $.ajax({
                 type : 'POST',
-                url  : 'album/index/deleteajax',
+                url  : 'deleteajax',
                 data : {'id':al_id},
                 success: function(data)
                 {
